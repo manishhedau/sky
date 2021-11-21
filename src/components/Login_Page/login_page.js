@@ -9,6 +9,7 @@ import axios from 'axios';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { setLocalUserId } from '../../services/local';
+import configration from "../../config";
 
 const LoginPage = () => {
 
@@ -41,7 +42,7 @@ const LoginPage = () => {
         console.log("going to validate login credentials!");
         try {
             console.log("Inside the try block.")
-            const validation = await axios.put("http://localhost:8080/login/", { email: inputEmail, mobile_number: inputMobile });
+            const validation = await axios.put(`${configration.backendURI}/login/`, { email: inputEmail, mobile_number: inputMobile });
             dispatch(initialGlobalStore(validation.data));
             setLocalUserId(validation.data._id)
             console.log("Status code : ", validation);
